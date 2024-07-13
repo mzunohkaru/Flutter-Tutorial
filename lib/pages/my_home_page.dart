@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../flavors.dart';
+import '../models/public_user.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -19,15 +20,20 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
-            final data = {
-              'name': 'John Doe',
-            };
-            await FirebaseFirestore.instance.collection('data').doc().set(data);
+            final userData = PublicUser(
+              uid: '123',
+              followingCount: 0,
+              followerCount: 0,
+            ).toJson();
+            await FirebaseFirestore.instance
+                .collection('public_user')
+                .doc()
+                .set(userData);
           } catch (e) {
             print(e);
           }
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
