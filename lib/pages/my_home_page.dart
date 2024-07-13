@@ -25,8 +25,8 @@ class MyHomePage extends StatelessWidget {
                 .doc("G4IMoK5ybIkH2q12fYSL")
                 .get();
 
-            final user = PublicUser.fromJson(userData.data()!);
-            debugPrint(user.uid);
+            final publicUser = PublicUser.fromJson(userData.data()!);
+            publicUser.greeting();
           } catch (e) {
             debugPrint(e.toString());
           }
