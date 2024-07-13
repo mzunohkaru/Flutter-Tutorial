@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../flavors.dart';
-import '../models/public_user.dart';
+import '../models/public_user/public_user.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
