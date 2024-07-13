@@ -11,3 +11,6 @@
 `flutterfire configure --out lib/gen/firebase_options_dev.dart --no-apply-gradle-plugins --platforms=android,ios --ios-bundle-id=[BUNDLE ID] --android-package-name=[ANDROID PACKAGE NAME]`
 `[BUNDLE ID] = com.firebaseapp.firSampleTool`
 `[ANDROID PACKAGE NAME] = com.firebaseapp.fir_sample_tool`
+
+### Lint
+`flutter analyze .`

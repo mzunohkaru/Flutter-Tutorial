@@ -26,9 +26,9 @@ class MyHomePage extends StatelessWidget {
                 .get();
 
             final user = PublicUser.fromJson(userData.data()!);
-            print(user.uid);
+            debugPrint(user.uid);
           } catch (e) {
-            print(e);
+            debugPrint(e.toString());
           }
         },
         child: const Icon(Icons.add),
