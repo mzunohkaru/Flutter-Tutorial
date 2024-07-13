@@ -120,17 +120,17 @@ class __$$PublicUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PublicUserImpl extends _PublicUser with DiagnosticableTreeMixin {
   const _$PublicUserImpl(
-      {required this.followingCount,
-      required this.followerCount,
-      required this.uid})
+      {this.followingCount = 0, this.followerCount = 0, required this.uid})
       : super._();
 
   factory _$PublicUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$PublicUserImplFromJson(json);
 
   @override
+  @JsonKey()
   final int followingCount;
   @override
+  @JsonKey()
   final int followerCount;
   @override
   final String uid;
@@ -183,8 +183,8 @@ class _$PublicUserImpl extends _PublicUser with DiagnosticableTreeMixin {
 
 abstract class _PublicUser extends PublicUser {
   const factory _PublicUser(
-      {required final int followingCount,
-      required final int followerCount,
+      {final int followingCount,
+      final int followerCount,
       required final String uid}) = _$PublicUserImpl;
   const _PublicUser._() : super._();
 

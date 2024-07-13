@@ -20,8 +20,7 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
-            const data = PublicUser(
-                followingCount: 12, followerCount: 11, uid: "second user id");
+            const data = PublicUser(uid: "third user id");
             await FirebaseFirestore.instance
                 .collection('public_user')
                 .doc("second")
