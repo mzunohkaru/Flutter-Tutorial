@@ -20,15 +20,13 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
-            final userData = PublicUser(
-              uid: '123',
-              followingCount: 0,
-              followerCount: 0,
-            ).toJson();
-            await FirebaseFirestore.instance
+            final userData = await FirebaseFirestore.instance
                 .collection('public_user')
-                .doc()
-                .set(userData);
+                .doc("G4IMoK5ybIkH2q12fYSL")
+                .get();
+
+            final user = PublicUser.fromJson(userData.data()!);
+            print(user.uid);
           } catch (e) {
             print(e);
           }
