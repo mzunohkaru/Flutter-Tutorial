@@ -1,12 +1,12 @@
 # Firebase = スネーク係数
-  # fir-sample-tool -> fir_sample
+# fir-sample-tool -> fir_sample
 name: fir_sample
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: ">=3.3.0 <4.0.0"
 dependencies:
   flutter:
     sdk: flutter
@@ -26,6 +26,9 @@ dependencies:
 
   get: ^4.6.6
 
+  # UI
+  fluttertoast: ^8.2.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -37,9 +40,7 @@ dev_dependencies:
   freezed: ^2.5.2
   json_serializable: ^6.8.0
 
-
 flutter:
-
   uses-material-design: true
 
 flavorizr:
