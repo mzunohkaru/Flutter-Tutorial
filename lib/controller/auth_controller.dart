@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find<AuthController>();
-  final rxAuthUser = Rx<User?>(null);
+  final rxAuthUser = Rx<User?>(FirebaseAuth.instance.currentUser);
   final rxIsLoginMode = false.obs;
   String email = '';
   String password = '';
@@ -64,6 +64,24 @@ class AuthController extends GetxController {
       },
       failure: () {
         UIHelper.showFlutterToast("ログインに失敗しました");
+      },
+    );
+  }
+
+  void onSignOutButtonPressed() async {
+    await _signOut();
+  }
+
+  Future<void> _signOut() async {
+    final repository = AuthRepository();
+    final result = await repository.signOut();
+    result.when(
+      success: (res) {
+        rxAuthUser.value = null;
+        UIHelper.showFlutterToast("ログアウトが成功しました");
+      },
+      failure: () {
+        UIHelper.showFlutterToast("ログアウトに失敗しました");
       },
     );
   }

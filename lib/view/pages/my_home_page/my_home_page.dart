@@ -18,11 +18,13 @@ class MyHomePage extends StatelessWidget {
         title: Text(F.title),
       ),
       body: Obx(() {
-        const style = TextStyle(fontSize: 60);
         if (authController.rxAuthUser.value == null) {
           return const AuthScreen();
         } else {
-          return const Text('ログイン中', style: style);
+          return ElevatedButton(
+            onPressed: authController.onSignOutButtonPressed,
+            child: const Text('ログアウト'),
+          );
         }
       }),
     );
