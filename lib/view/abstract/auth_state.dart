@@ -10,8 +10,10 @@ abstract class AuthState<T extends StatefulWidget> extends State<T> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           titleWidget(),
           _signupForm(),
