@@ -5,6 +5,7 @@ import '../../../controller/my_home_page_controller.dart';
 import '../../../controller/remote_config_controller.dart';
 import '../../../flavors.dart';
 import 'components/auth_screen/auth_screen.dart';
+import 'components/main_screen.dart';
 import 'components/maintenance_screen.dart';
 import 'components/verify_email_screen.dart';
 
@@ -21,7 +22,6 @@ class MyHomePage extends StatelessWidget {
         title: Text(F.title),
       ),
       body: Obx(() {
-        const style = TextStyle(fontSize: 60.0);
         final authUser = authController.rxAuthUser.value;
         if (remoteConfigController.rxIsMaintenanceMode.value) {
           return const MaintenanceScreen();
@@ -30,12 +30,7 @@ class MyHomePage extends StatelessWidget {
         } else if (!authUser.emailVerified) {
           return const VerifyEmailScreen();
         } else {
-          return ElevatedButton(
-              onPressed: authController.onSignOutButtonPressed,
-              child: const Text(
-                "ログアウトする",
-                style: style,
-              ));
+          return const MainScreen();
         }
       }),
     );
