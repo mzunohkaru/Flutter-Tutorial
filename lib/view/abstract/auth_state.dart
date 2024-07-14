@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/auth_controller.dart';
+import '../common/rounded_button.dart';
+import '../common/text_filed_container.dart';
 
 abstract class AuthState<T extends StatefulWidget> extends State<T> {
   final _formKey = GlobalKey<FormState>();
@@ -40,40 +42,44 @@ abstract class AuthState<T extends StatefulWidget> extends State<T> {
   // email入力をする関数
   Widget _emailTextField() {
     final controller = AuthController.to;
-    return TextFormField(
-      decoration: const InputDecoration(hintText: "メールアドレス"),
-      onSaved: controller.setEmail,
-      validator: (value) {
-        return GetUtils.isEmail(value!) ? null : "正しいメールアドレスを入力して下さい";
-      },
+    return TextFieldContainer(
+      child: TextFormField(
+        decoration: const InputDecoration(hintText: "メールアドレス"),
+        onSaved: controller.setEmail,
+        validator: (value) {
+          return GetUtils.isEmail(value!) ? null : "正しいメールアドレスを入力して下さい";
+        },
+      ),
     );
   }
 
   // password入力をする関数
   Widget _passwordTextField() {
     final controller = AuthController.to;
-    return TextFormField(
-      obscureText: true, // パスワードを隠す
-      decoration: const InputDecoration(hintText: "パスワード"),
-      onSaved: controller.setPassword,
-      validator: (value) {
-        return value!.length > 7 ? null : "パスワードが短すぎます";
-      },
+    return TextFieldContainer(
+      child: TextFormField(
+        obscureText: true, // パスワードを隠す
+        decoration: const InputDecoration(hintText: "パスワード"),
+        onSaved: controller.setPassword,
+        validator: (value) {
+          return value!.length > 7 ? null : "パスワードが短すぎます";
+        },
+      ),
     );
   }
 
   Widget toggleLoginModeButton();
 
   Widget _positiveButton() {
-    return ElevatedButton(
+    return RoundedButton(
         onPressed: () {
           // バリデーションを行う
           if (_formKey.currentState!.validate()) {
             // フォームフィールドの情報を変数に保存
             _formKey.currentState!.save();
-            AuthController.to.onPositiveButtonPressed();
           }
+          AuthController.to.onPositiveButtonPressed();
         },
-        child: const Text("送信"));
+        textValue: "送信");
   }
 }
