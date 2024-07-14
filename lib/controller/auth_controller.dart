@@ -22,7 +22,8 @@ class AuthController extends GetxController {
     }
   }
 
-  void onInit() {
+  @override
+  void onInit() async {
     super.onInit();
     // 認証状態が変化するたびに、リスナーが呼び出される
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
@@ -84,6 +85,11 @@ class AuthController extends GetxController {
         UIHelper.showFlutterToast("ログアウトに失敗しました");
       },
     );
+  }
+
+  Future<void> _sendEmailVerification() async {
+    final repository = AuthRepository();
+    final result = await repository.sendEmailVerification(rxAuthUser.value!);
   }
 
   void onToggleLoginModeButtonPressed() => _toggleIsLoginMode();
