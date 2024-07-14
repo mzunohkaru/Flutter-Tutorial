@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fir_sample/constant/my_home_page_constant.dart';
 import 'package:fir_sample/repository/firestore_repository.dart';
 import 'package:fir_sample/ui_core/ui_helper.dart';
 import 'package:get/get.dart';
 
+import '../core/firestore/doc_ref_core.dart';
 import '../models/public_user/public_user.dart';
 import '../typedefs/firestore_typedef.dart';
 
@@ -16,10 +16,8 @@ class MyHomePageController extends GetxController {
 
   Future<void> _createDoc() async {
     final repository = FirestoreRepository();
-    const user = PublicUser(uid: "obx");
-    final ref = FirebaseFirestore.instance
-        .collection(MyHomePageConstant.collectionPath)
-        .doc(user.uid);
+    const user = PublicUser(uid: "core");
+    final ref = DocRefCore.publicUserDocRef(user.uid);
     final data = user.toJson();
     final result = await repository.createDoc(ref, data);
     result.when(success: (_) async {
