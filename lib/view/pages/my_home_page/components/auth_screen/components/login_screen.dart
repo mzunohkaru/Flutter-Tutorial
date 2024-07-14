@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../constant/auth_constant.dart';
 import '../../../../../../controller/auth_controller.dart';
 import '../../../../../abstract/auth_state.dart';
 
@@ -13,7 +14,7 @@ class _LoginScreenState extends AuthState<LoginScreen> {
   @override
   Widget titleWidget() {
     return const Text(
-      "ログイン",
+      AuthConstant.loginTitle,
       style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
     );
   }
@@ -24,7 +25,7 @@ class _LoginScreenState extends AuthState<LoginScreen> {
     return TextButton(
         onPressed: AuthController.to.onToggleLoginModeButtonPressed,
         child: const Text(
-          "新規登録画面へ",
+          AuthConstant.toSignupScreenText,
           style: style,
         ));
   }

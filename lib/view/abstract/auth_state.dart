@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constant/auth_constant.dart';
 import '../../controller/auth_controller.dart';
 import '../common/rounded_button.dart';
 import '../common/text_filed_container.dart';
@@ -9,17 +10,14 @@ abstract class AuthState<T extends StatefulWidget> extends State<T> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            titleWidget(),
-            _signupForm(),
-            _positiveButton(),
-            toggleLoginModeButton()
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          titleWidget(),
+          _signupForm(),
+          _positiveButton(),
+          toggleLoginModeButton()
+        ],
       ),
     );
   }
@@ -44,10 +42,12 @@ abstract class AuthState<T extends StatefulWidget> extends State<T> {
     final controller = AuthController.to;
     return TextFieldContainer(
       child: TextFormField(
-        decoration: const InputDecoration(hintText: "メールアドレス"),
+        decoration: const InputDecoration(hintText: AuthConstant.emailHintText),
         onSaved: controller.setEmail,
         validator: (value) {
-          return GetUtils.isEmail(value!) ? null : "正しいメールアドレスを入力して下さい";
+          return GetUtils.isEmail(value!)
+              ? null
+              : AuthConstant.emailValidatorMsg;
         },
       ),
     );
@@ -59,10 +59,11 @@ abstract class AuthState<T extends StatefulWidget> extends State<T> {
     return TextFieldContainer(
       child: TextFormField(
         obscureText: true, // パスワードを隠す
-        decoration: const InputDecoration(hintText: "パスワード"),
+        decoration:
+            const InputDecoration(hintText: AuthConstant.passwordHintText),
         onSaved: controller.setPassword,
         validator: (value) {
-          return value!.length > 7 ? null : "パスワードが短すぎます";
+          return value!.length > 7 ? null : AuthConstant.passwordValidtorMsg;
         },
       ),
     );
@@ -72,6 +73,7 @@ abstract class AuthState<T extends StatefulWidget> extends State<T> {
 
   Widget _positiveButton() {
     return RoundedButton(
+        color: Colors.orange,
         onPressed: () {
           // バリデーションを行う
           if (_formKey.currentState!.validate()) {
@@ -80,6 +82,6 @@ abstract class AuthState<T extends StatefulWidget> extends State<T> {
           }
           AuthController.to.onPositiveButtonPressed();
         },
-        textValue: "送信");
+        textValue: AuthConstant.positiveButtonText);
   }
 }

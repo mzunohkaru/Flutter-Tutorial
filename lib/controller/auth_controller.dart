@@ -3,32 +3,25 @@ import 'package:fir_sample/ui_core/ui_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../constant/auth_constant.dart';
+
 class AuthController extends GetxController {
   static AuthController get to => Get.find<AuthController>();
   final rxAuthUser = Rx<User?>(FirebaseAuth.instance.currentUser);
   final rxIsLoginMode = true.obs;
-  String email = '';
-  String password = '';
+  String email = "";
+  String password = "";
 
   void setEmail(String? value) {
-    if (value != null) {
-      email = value;
-    }
+    // valueがnullなら処理を終了させる
+    if (value == null) return;
+    email = value;
   }
 
   void setPassword(String? value) {
-    if (value != null) {
-      password = value;
-    }
-  }
-
-  @override
-  void onInit() async {
-    super.onInit();
-    // 認証状態が変化するたびに、リスナーが呼び出される
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      rxAuthUser.value = user;
-    });
+    // valueがnullなら処理を終了させる
+    if (value == null) return;
+    password = value;
   }
 
   void onPositiveButtonPressed() async {
@@ -43,30 +36,24 @@ class AuthController extends GetxController {
     final repository = AuthRepository();
     final result = await repository.createUserWithEmailAndPassword(
         email.trim(), password.trim());
-    result.when(
-      success: (res) {
-        rxAuthUser.value = res;
-        UIHelper.showFlutterToast("新規登録が成功しました");
-      },
-      failure: () {
-        UIHelper.showFlutterToast("新規登録に失敗しました");
-      },
-    );
+    result.when(success: (res) {
+      rxAuthUser.value = res;
+      UIHelper.showFlutterToast(AuthConstant.signupSuccessMsg);
+    }, failure: () {
+      UIHelper.showFlutterToast(AuthConstant.signupFailureMsg);
+    });
   }
 
   Future<void> _signInWithEmailAndPassword() async {
     final repository = AuthRepository();
     final result = await repository.signInWithEmailAndPassword(
         email.trim(), password.trim());
-    result.when(
-      success: (res) {
-        rxAuthUser.value = res;
-        UIHelper.showFlutterToast("ログインが成功しました");
-      },
-      failure: () {
-        UIHelper.showFlutterToast("ログインに失敗しました");
-      },
-    );
+    result.when(success: (res) {
+      rxAuthUser.value = res;
+      UIHelper.showFlutterToast(AuthConstant.signInSuccessMsg);
+    }, failure: () {
+      UIHelper.showFlutterToast(AuthConstant.signInFailureMsg);
+    });
   }
 
   void onSignOutButtonPressed() async {
@@ -76,20 +63,12 @@ class AuthController extends GetxController {
   Future<void> _signOut() async {
     final repository = AuthRepository();
     final result = await repository.signOut();
-    result.when(
-      success: (res) {
-        rxAuthUser.value = null;
-        UIHelper.showFlutterToast("ログアウトが成功しました");
-      },
-      failure: () {
-        UIHelper.showFlutterToast("ログアウトに失敗しました");
-      },
-    );
-  }
-
-  Future<void> _sendEmailVerification() async {
-    final repository = AuthRepository();
-    final result = await repository.sendEmailVerification(rxAuthUser.value!);
+    result.when(success: (_) {
+      rxAuthUser.value = null;
+      UIHelper.showFlutterToast(AuthConstant.signOutSuccessMsg);
+    }, failure: () {
+      UIHelper.showFlutterToast(AuthConstant.signOutFailureMsg);
+    });
   }
 
   void onToggleLoginModeButtonPressed() => _toggleIsLoginMode();
