@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   static AuthController get to => Get.find<AuthController>();
   final rxAuthUser = Rx<User?>(FirebaseAuth.instance.currentUser);
-  final rxIsLoginMode = false.obs;
+  final rxIsLoginMode = true.obs;
   String email = '';
   String password = '';
 
