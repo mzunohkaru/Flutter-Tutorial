@@ -20,6 +20,7 @@ dependencies:
   # Firebase
   firebase_core: ^3.2.0
   cloud_firestore: ^5.1.0
+  firebase_auth: ^5.1.2
 
   # Freezed
   freezed_annotation: ^2.4.3
