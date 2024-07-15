@@ -21,21 +21,19 @@ class MainController extends GetxController {
     final authUser = AuthController.to.rxAuthUser.value;
     if (authUser == null) return;
     final repository = FirestoreRepository();
-    final ref = DocRefCore.publicUserDocRef(authUser.uid);
+    final uid = authUser.uid;
+    final ref = DocRefCore.publicUserDocRef(uid);
     final result = await repository.getDoc(ref);
-    result.when(
-      success: (res) async {
-        final json = res.data();
-        if (res.exists && json != null) {
-          rxPublicUser.value = PublicUser.fromJson(json);
-        } else {
-          await _createPublicUser(ref, authUser.uid);
-        }
-      },
-      failure: () {
-        UIHelper.showFlutterToast("ユーザーの取得が失敗しました。");
-      },
-    );
+    result.when(success: (res) async {
+      final json = res.data();
+      if (res.exists && json != null) {
+        rxPublicUser.value = PublicUser.fromJson(json);
+      } else {
+        await _createPublicUser(ref, uid);
+      }
+    }, failure: () {
+      UIHelper.showFlutterToast("ユーザーの読み取りが失敗しました");
+    });
   }
 
   Future<void> _createPublicUser(DocRef ref, String uid) async {
@@ -45,9 +43,9 @@ class MainController extends GetxController {
     final result = await repository.createDoc(ref, json);
     result.when(success: (_) {
       rxPublicUser.value = newPublicUser;
-      UIHelper.showFlutterToast("ユーザーの作成が成功しました。");
+      UIHelper.showFlutterToast("ユーザーの作成が成功しました");
     }, failure: () {
-      UIHelper.showFlutterToast("ユーザーの作成が失敗しました。");
+      UIHelper.showFlutterToast("ユーザーの作成が失敗しました");
     });
   }
 }
