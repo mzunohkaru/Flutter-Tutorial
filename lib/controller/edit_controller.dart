@@ -3,6 +3,7 @@ import 'package:fir_sample/core/firestore/doc_ref_core.dart';
 import 'package:fir_sample/ui_core/ui_helper.dart';
 import 'package:get/get.dart';
 
+import '../constant/edit_constant.dart';
 import '../repository/firestore_repository.dart';
 import 'auth_controller.dart';
 
@@ -34,9 +35,9 @@ class EditController extends GetxController {
         name: name,
       ); // 一部分のみ更新
       MainController.to.rxPublicUser.value = newPublicUser; // 新しく更新
-      UIHelper.showFlutterToast("ユーザーの更新が成功しました");
+      UIHelper.showFlutterToast(EditConstant.successMsg);
     }, failure: () {
-      UIHelper.showFlutterToast("ユーザーの更新が失敗しました");
+      UIHelper.showFlutterToast(EditConstant.failureMsg);
     });
   }
 }
