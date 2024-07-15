@@ -14,7 +14,7 @@ class ContentScreen extends StatelessWidget {
       children: [
         Obx(
           () => Text(
-            MainController.to.rxPublicUser.value?.uid ?? "Nullです",
+            MainController.to.rxPublicUser.value?.name ?? "Nullです",
             style: style,
           ),
         ),
