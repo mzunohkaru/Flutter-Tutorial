@@ -20,8 +20,9 @@ PublicUser _$PublicUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PublicUser {
-  int get followingCount => throw _privateConstructorUsedError;
   int get followerCount => throw _privateConstructorUsedError;
+  int get followingCount => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $PublicUserCopyWith<$Res> {
           PublicUser value, $Res Function(PublicUser) then) =
       _$PublicUserCopyWithImpl<$Res, PublicUser>;
   @useResult
-  $Res call({int followingCount, int followerCount, String uid});
+  $Res call({int followerCount, int followingCount, String name, String uid});
 }
 
 /// @nodoc
@@ -52,19 +53,24 @@ class _$PublicUserCopyWithImpl<$Res, $Val extends PublicUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? followingCount = null,
     Object? followerCount = null,
+    Object? followingCount = null,
+    Object? name = null,
     Object? uid = null,
   }) {
     return _then(_value.copyWith(
-      followingCount: null == followingCount
-          ? _value.followingCount
-          : followingCount // ignore: cast_nullable_to_non_nullable
-              as int,
       followerCount: null == followerCount
           ? _value.followerCount
           : followerCount // ignore: cast_nullable_to_non_nullable
               as int,
+      followingCount: null == followingCount
+          ? _value.followingCount
+          : followingCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -81,7 +87,7 @@ abstract class _$$PublicUserImplCopyWith<$Res>
       __$$PublicUserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int followingCount, int followerCount, String uid});
+  $Res call({int followerCount, int followingCount, String name, String uid});
 }
 
 /// @nodoc
@@ -95,19 +101,24 @@ class __$$PublicUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? followingCount = null,
     Object? followerCount = null,
+    Object? followingCount = null,
+    Object? name = null,
     Object? uid = null,
   }) {
     return _then(_$PublicUserImpl(
-      followingCount: null == followingCount
-          ? _value.followingCount
-          : followingCount // ignore: cast_nullable_to_non_nullable
-              as int,
       followerCount: null == followerCount
           ? _value.followerCount
           : followerCount // ignore: cast_nullable_to_non_nullable
               as int,
+      followingCount: null == followingCount
+          ? _value.followingCount
+          : followingCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -118,9 +129,12 @@ class __$$PublicUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PublicUserImpl extends _PublicUser with DiagnosticableTreeMixin {
+class _$PublicUserImpl extends _PublicUser {
   const _$PublicUserImpl(
-      {this.followingCount = 0, this.followerCount = 0, required this.uid})
+      {this.followerCount = 0,
+      this.followingCount = 0,
+      this.name = "",
+      required this.uid})
       : super._();
 
   factory _$PublicUserImpl.fromJson(Map<String, dynamic> json) =>
@@ -128,26 +142,19 @@ class _$PublicUserImpl extends _PublicUser with DiagnosticableTreeMixin {
 
   @override
   @JsonKey()
+  final int followerCount;
+  @override
+  @JsonKey()
   final int followingCount;
   @override
   @JsonKey()
-  final int followerCount;
+  final String name;
   @override
   final String uid;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PublicUser(followingCount: $followingCount, followerCount: $followerCount, uid: $uid)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PublicUser'))
-      ..add(DiagnosticsProperty('followingCount', followingCount))
-      ..add(DiagnosticsProperty('followerCount', followerCount))
-      ..add(DiagnosticsProperty('uid', uid));
+  String toString() {
+    return 'PublicUser(followerCount: $followerCount, followingCount: $followingCount, name: $name, uid: $uid)';
   }
 
   @override
@@ -155,17 +162,18 @@ class _$PublicUserImpl extends _PublicUser with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PublicUserImpl &&
-            (identical(other.followingCount, followingCount) ||
-                other.followingCount == followingCount) &&
             (identical(other.followerCount, followerCount) ||
                 other.followerCount == followerCount) &&
+            (identical(other.followingCount, followingCount) ||
+                other.followingCount == followingCount) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, followingCount, followerCount, uid);
+      Object.hash(runtimeType, followerCount, followingCount, name, uid);
 
   @JsonKey(ignore: true)
   @override
@@ -183,8 +191,9 @@ class _$PublicUserImpl extends _PublicUser with DiagnosticableTreeMixin {
 
 abstract class _PublicUser extends PublicUser {
   const factory _PublicUser(
-      {final int followingCount,
-      final int followerCount,
+      {final int followerCount,
+      final int followingCount,
+      final String name,
       required final String uid}) = _$PublicUserImpl;
   const _PublicUser._() : super._();
 
@@ -192,9 +201,11 @@ abstract class _PublicUser extends PublicUser {
       _$PublicUserImpl.fromJson;
 
   @override
+  int get followerCount;
+  @override
   int get followingCount;
   @override
-  int get followerCount;
+  String get name;
   @override
   String get uid;
   @override
