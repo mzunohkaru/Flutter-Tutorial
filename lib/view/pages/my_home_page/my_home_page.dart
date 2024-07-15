@@ -5,7 +5,7 @@ import '../../../controller/my_home_page_controller.dart';
 import '../../../controller/remote_config_controller.dart';
 import '../../../flavors.dart';
 import 'components/auth_screen/auth_screen.dart';
-import 'components/main_screen.dart';
+import 'components/main_screen/main_screen.dart';
 import 'components/maintenance_screen.dart';
 import 'components/verify_email_screen.dart';
 
