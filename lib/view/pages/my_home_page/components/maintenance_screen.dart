@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
- 
+
 class MaintenanceScreen extends StatelessWidget {
   const MaintenanceScreen({super.key});
   @override
