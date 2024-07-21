@@ -1,4 +1,5 @@
 import 'package:fir_sample/core/firestore/doc_ref_core.dart';
+import 'package:fir_sample/enums/env_key.dart';
 import 'package:fir_sample/models/public_user/public_user.dart';
 import 'package:fir_sample/repository/firestore_repository.dart';
 import 'package:fir_sample/ui_core/ui_helper.dart';
@@ -40,7 +41,7 @@ class MainController extends GetxController {
 
   Future<void> _createPublicUser(DocRef ref, String uid) async {
     final repository = FirestoreRepository();
-    final bucketName = dotenv.get("AWS_S3_USER_IMAGES_BUCKET");
+    final bucketName = dotenv.get(EnvKey.AWS_S3_USER_IMAGES_BUCKET.name);
     final image = ModeratedImage(bucketName: bucketName).toJson();
     final newPublicUser = PublicUser(image: image, uid: uid);
     final json = newPublicUser.toJson();
