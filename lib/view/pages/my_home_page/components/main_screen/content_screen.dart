@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 import '../../../../../controller/auth_controller.dart';
 import '../../../../../controller/main_controller.dart';
-import '../../../../../enums/env_key.dart';
 
 class ContentScreen extends StatelessWidget {
   const ContentScreen({super.key});
@@ -23,7 +21,7 @@ class ContentScreen extends StatelessWidget {
         const SizedBox(
           height: 20.0,
         ),
-        Text(dotenv.get(EnvKey.AWS_S3_USER_IMAGES_BUCKET.name)),
+        // TODO: ByteImage(bytes: bytes),
         const SizedBox(
           height: 20.0,
         ),

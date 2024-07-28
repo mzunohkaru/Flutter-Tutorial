@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../constant/edit_constant.dart';
 import '../../../../../controller/edit_controller.dart';
+import '../../../../common/byte_image.dart';
 import '../../../../common/rounded_button.dart';
 import '../../../../common/text_filed_container.dart';
 
@@ -19,7 +20,7 @@ class _EditScreenState extends State<EditScreen> {
     Get.put(EditController());
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [_titleWidget(), _form(), _positiveButton()],
+      children: [_titleWidget(), _form(), _positiveButton(), _image()],
     );
   }
 
@@ -59,5 +60,14 @@ class _EditScreenState extends State<EditScreen> {
           EditController.to.onPositiveButtonPressed();
         },
         textValue: EditConstant.positiveButtonText);
+  }
+
+  Widget _image() {
+    return Obx(() => EditController.to.rxUint8list.value == null
+        ? InkWell(
+            onTap: EditController.to.onImageIconTapped,
+            child: const Icon(Icons.add_a_photo),
+          )
+        : ByteImage(bytes: EditController.to.rxUint8list.value!));
   }
 }

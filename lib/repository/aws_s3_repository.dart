@@ -5,7 +5,7 @@ import 'package:fir_sample/infrastructure/firestore/result.dart';
 
 import '../models/result/result.dart';
 
-class AWS3Repository {
+class AWSS3Repository {
   FutureResult<Uint8List> getObject(String bucket, String object) async {
     final client = AWSS3Client();
     try {
